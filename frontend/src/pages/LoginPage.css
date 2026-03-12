@@ -1,0 +1,237 @@
+/* ============================================================
+   LoginPage — Arkaplan + Kart Tasarımı (güncellenmiş)
+   ============================================================ */
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Sıcak krem tonlu arkaplan gradyanı */
+  background: linear-gradient(135deg, #EDE6D6 0%, #F5F0E8 40%, #E8DFD0 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Arka plan dekoratif halkalar */
+.login-page::before,
+.login-page::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.login-page::before {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(200,134,10,0.08) 0%, transparent 70%);
+  top: -120px;
+  right: -80px;
+}
+.login-page::after {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(74,103,65,0.07) 0%, transparent 70%);
+  bottom: -80px;
+  left: -60px;
+}
+
+/* Ana kart kutusu */
+.login-box {
+  width: 100%;
+  max-width: 420px;
+  padding: 44px 40px 36px;
+  /* Beyaz/krem kart */
+  background: rgba(249, 246, 239, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(221, 212, 192, 0.7);
+  border-radius: 18px;
+  box-shadow:
+    0 4px 24px rgba(28, 20, 16, 0.10),
+    0 1px 4px rgba(28, 20, 16, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  position: relative;
+  z-index: 1;
+}
+
+/* Logo / üniversite ikonu alanı */
+.login-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: var(--brown, #1C1410);
+  border-radius: 14px;
+  margin: 0 auto 20px;
+  box-shadow: 0 4px 14px rgba(28, 20, 16, 0.25);
+}
+.login-logo svg {
+  width: 26px;
+  height: 26px;
+  stroke: #F5F0E8;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.login-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--brown, #1C1410);
+  text-align: center;
+  margin-bottom: 4px;
+  letter-spacing: -0.3px;
+}
+
+.login-sub {
+  font-size: 13px;
+  color: var(--text-muted, #9C7B6E);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* Ayırıcı çizgi */
+.login-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border, #DDD4C0), transparent);
+  margin-bottom: 28px;
+}
+
+.login-field {
+  margin-bottom: 16px;
+}
+
+.login-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--ink-mid, #5C4A3E);
+  margin-bottom: 7px;
+}
+
+.login-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-input-icon {
+  position: absolute;
+  left: 13px;
+  pointer-events: none;
+  color: var(--brown-muted, #9C7B6E);
+  display: flex;
+  align-items: center;
+}
+.login-input-icon svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.login-input-wrap input {
+  width: 100%;
+  padding: 11px 42px;
+  border: 1.5px solid var(--border, #DDD4C0);
+  border-radius: 8px;
+  font-size: 14px;
+  background: rgba(255, 253, 248, 0.8);
+  color: var(--brown, #1C1410);
+  transition: all 0.18s ease;
+  outline: none;
+}
+.login-input-wrap input:focus {
+  border-color: var(--amber, #C8860A);
+  box-shadow: 0 0 0 3px rgba(200, 134, 10, 0.12);
+  background: #FFFDF8;
+}
+.login-input-wrap input::placeholder {
+  color: #C0B0A5;
+}
+
+.pass-eye {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--brown-muted, #9C7B6E);
+  cursor: pointer;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  opacity: 0.5;
+  transition: opacity 0.15s;
+}
+.pass-eye:hover { opacity: 1; }
+.pass-eye svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.login-submit {
+  width: 100%;
+  padding: 12px;
+  background: var(--brown, #1C1410);
+  color: var(--cream, #F5F0E8);
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.18s ease;
+  margin-top: 24px;
+  letter-spacing: 0.2px;
+}
+.login-submit:hover:not(:disabled) {
+  background: #3D2B1F;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(28, 20, 16, 0.22);
+}
+.login-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.login-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(245, 240, 232, 0.3);
+  border-top-color: var(--cream, #F5F0E8);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Alt bilgi */
+.login-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--text-muted, #9C7B6E);
+}
+
+@media (max-width: 480px) {
+  .login-box {
+    padding: 32px 24px 28px;
+    border-radius: 12px;
+    margin: 16px;
+  }
+}
