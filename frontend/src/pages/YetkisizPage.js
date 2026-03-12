@@ -6,8 +6,7 @@ export default function YetkisizPage() {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  // Kullanıcının kendi dashboard'una yönlendir
-  const hedef = user?.rol === 'KULLANICI' ? '/derslerim' : '/dashboard';
+    const hedef = user?.rol === 'KULLANICI' ? '/derslerim' : '/dashboard';
 
   return (
     <div style={{

@@ -8,8 +8,7 @@ export function AuthProvider({ children }) {
   const [token, setToken]     = useState(localStorage.getItem('obs_token'));
   const [loading, setLoading] = useState(true);
 
-  // Token değişince axios header'ını güncelle
-  useEffect(() => {
+    useEffect(() => {
     if (token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       const saved = localStorage.getItem('obs_user');

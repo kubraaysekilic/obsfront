@@ -58,10 +58,8 @@ function LoginPage() {
         ogrenciNo:    res.ogrenciNo   || null,
       });
       toast.success('Hoş geldiniz, ' + res.adSoyad);
-      // Öğrenci → Derslerim | Diğerleri → Dashboard
       navigate(res.rol === 'KULLANICI' ? '/derslerim' : '/dashboard');
     } catch (err) {
-      // 429 → bruteforce uyarısı
       if (err?.response?.status === 429) {
         toast.error('Çok fazla başarısız deneme. Lütfen bekleyin.');
       } else {
@@ -76,7 +74,6 @@ function LoginPage() {
     <div className="login-page">
       <div className="login-box">
 
-        {/* Logo */}
         <div className="login-logo">
           <SchoolIcon />
         </div>

@@ -2,13 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { kullaniciService } from '../services/api';
 
-/* ───── ikonlar ───── */
 const ico = { width: 14, height: 14, stroke: 'currentColor', fill: 'none', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' };
 const ShieldIcon = () => <svg viewBox="0 0 24 24" style={ico}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
 const LinkIcon   = () => <svg viewBox="0 0 24 24" style={ico}><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>;
 const RefreshIcon= () => <svg viewBox="0 0 24 24" style={ico}><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>;
 
-/* ───── renk haritası ───── */
 const rolRenk = {
   ADMIN:          { bg:'#FBF0D6', color:'#A06800', border:'#F0D080' },
   OGRETIM_UYESI:  { bg:'#E8F0E6', color:'#3A6030', border:'#9BC48A' },
@@ -26,12 +24,10 @@ export default function KullanicilarPage() {
   const [loading,      setLoading]      = useState(true);
   const [aktifTab,     setAktifTab]     = useState('kullanicilar');
 
-  /* modal state'leri */
-  const [rolModal,    setRolModal]    = useState(null); // { id, kullaniciAdi, mevcutRol }
-  const [baglaModal,  setBaglaModal]  = useState(null); // { id, kullaniciAdi, ogrenciId }
+  const [rolModal,    setRolModal]    = useState(null);
+  const [baglaModal,  setBaglaModal]  = useState(null);
   const [baglaInput,  setBaglaInput]  = useState('');
 
-  /* ──── veri yükleme ──── */
   const fetchKullanicilar = useCallback(async () => {
     setLoading(true);
     try { setKullanicilar(await kullaniciService.getAll()); }
@@ -51,7 +47,6 @@ export default function KullanicilarPage() {
 
   useEffect(() => { fetchKullanicilar(); fetchLogs(); }, [fetchKullanicilar, fetchLogs]);
 
-  /* ──── işlemler ──── */
   const handleRolDegistir = async (id, yeniRol) => {
     try {
       await kullaniciService.rolDegistir(id, yeniRol);
@@ -83,11 +78,9 @@ export default function KullanicilarPage() {
     } catch (e) { toast.error(e.message); }
   };
 
-  /* ──── render ──── */
   return (
     <div style={{ padding:'28px 32px' }}>
 
-      {/* başlık */}
       <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:4 }}>
         <ShieldIcon />
         <h1 style={{ fontSize:22, fontWeight:700, color:'var(--brown)' }}>Kullanıcı Yönetimi</h1>
@@ -96,7 +89,6 @@ export default function KullanicilarPage() {
         STRIDE — Elevation of Privilege deneyi · Sadece ADMIN erişebilir
       </p>
 
-      {/* tab bar */}
       <div style={{ display:'flex', gap:4, marginBottom:20, borderBottom:'1.5px solid var(--border)' }}>
         {[['kullanicilar','Kullanıcılar'],['guvenlik-loglari','Güvenlik Logları']].map(([key, label]) => (
           <button key={key} onClick={() => setAktifTab(key)} style={{
@@ -109,7 +101,6 @@ export default function KullanicilarPage() {
         ))}
       </div>
 
-      {/* ════════════ KULLANICILAR ════════════ */}
       {aktifTab === 'kullanicilar' && (
         <div style={{ background:'var(--surface)', border:'1px solid var(--border)', borderRadius:10, overflow:'auto' }}>
           <table style={{ width:'100%', borderCollapse:'collapse', fontSize:13 }}>
@@ -138,7 +129,6 @@ export default function KullanicilarPage() {
                       {k.rol}
                     </span>
                   </td>
-                  {/* FK kolonları */}
                   <td style={{ padding:'9px 14px', fontFamily:'monospace', fontSize:12 }}>
                     {k.ogrenciNo
                       ? <span style={{ background:'#EEF2FF', color:'#3730A3', padding:'1px 8px',
@@ -176,7 +166,6 @@ export default function KullanicilarPage() {
         </div>
       )}
 
-      {/* ════════════ GÜVENLİK LOGLARI ════════════ */}
       {aktifTab === 'guvenlik-loglari' && (
         <>
           <div style={{ marginBottom:12, padding:'10px 16px', background:'#FBF0D6',
@@ -235,7 +224,6 @@ export default function KullanicilarPage() {
         </>
       )}
 
-      {/* ════════════ ROL DEĞİŞTİR MODAL ════════════ */}
       {rolModal && (
         <div style={{ position:'fixed', inset:0, background:'rgba(28,20,16,.45)',
           display:'flex', alignItems:'center', justifyContent:'center', zIndex:100 }}>
@@ -271,7 +259,6 @@ export default function KullanicilarPage() {
         </div>
       )}
 
-      {/* ════════════ ÖĞRENCİ BAĞLA MODAL ════════════ */}
       {baglaModal && (
         <div style={{ position:'fixed', inset:0, background:'rgba(28,20,16,.45)',
           display:'flex', alignItems:'center', justifyContent:'center', zIndex:100 }}>

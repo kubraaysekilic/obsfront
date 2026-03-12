@@ -28,7 +28,6 @@ function AppLayout({ children }) {
   );
 }
 
-/** Giriş sonrası role göre yönlendir */
 function RootRedirect() {
   const { user } = useAuth();
   if (user?.rol === 'KULLANICI') return <Navigate to="/derslerim" replace />;
@@ -40,16 +39,13 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Public */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/yetkisiz" element={<YetkisizPage />} />
 
-          {/* Giriş sonrası yönlendirme */}
           <Route path="/" element={
             <ProtectedRoute><RootRedirect /></ProtectedRoute>
           } />
 
-          {/* ── ADMIN + OGRETIM_UYESI ── */}
           <Route path="/dashboard" element={
             <ProtectedRoute roles={ADMIN_OGRETIM}>
               <AppLayout><Dashboard /></AppLayout>
@@ -76,14 +72,12 @@ function App() {
             </ProtectedRoute>
           } />
 
-          {/* ── Sadece ADMIN ── */}
           <Route path="/kullanicilar" element={
             <ProtectedRoute roles={['ADMIN']}>
               <AppLayout><KullanicilarPage /></AppLayout>
             </ProtectedRoute>
           } />
 
-          {/* ── Sadece KULLANICI (öğrenci) ── */}
           <Route path="/derslerim" element={
             <ProtectedRoute roles={['KULLANICI']}>
               <AppLayout><DerslerimPage /></AppLayout>
@@ -95,7 +89,6 @@ function App() {
             </ProtectedRoute>
           } />
 
-          {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 

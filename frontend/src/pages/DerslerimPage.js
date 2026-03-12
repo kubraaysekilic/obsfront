@@ -12,14 +12,12 @@ const BookIcon = () => (
 
 export default function DerslerimPage() {
   const { user }          = useAuth();
-  const [notlar, setNotlar]   = useState([]);  // not kaydından ders + not bilgisi
   const [loading, setLoading] = useState(true);
   const [hata, setHata]       = useState(null);
 
   useEffect(() => {
     (async () => {
       try {
-        // /api/notlar/benim → hem ders hem not bilgisini tek istekte alıyoruz
         const res = await axios.get('/api/notlar/benim');
         setNotlar(res.data);
       } catch (e) {
@@ -43,7 +41,6 @@ export default function DerslerimPage() {
   return (
     <div style={{ padding:'28px 32px' }}>
 
-      {/* Başlık */}
       <div style={{ marginBottom:24 }}>
         <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:4 }}>
           <BookIcon />
@@ -54,7 +51,6 @@ export default function DerslerimPage() {
         </p>
       </div>
 
-      {/* Hata */}
       {hata && (
         <div style={{ padding:'16px 20px', background:'#F5E8E5', border:'1px solid #E0A098',
           borderRadius:10, color:'#A63825', fontSize:14, marginBottom:24 }}>
@@ -68,7 +64,6 @@ export default function DerslerimPage() {
         </div>
       )}
 
-      {/* Kart grid */}
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(280px,1fr))', gap:16 }}>
         {notlar.map(n => {
           const rk = harfRenk(n.harfNotu);
@@ -78,7 +73,6 @@ export default function DerslerimPage() {
               borderRadius:12, padding:'20px 22px',
               boxShadow:'0 2px 8px rgba(28,20,16,0.06)',
             }}>
-              {/* Ders kodu + harf notu */}
               <div style={{ display:'flex', justifyContent:'space-between',
                 alignItems:'flex-start', marginBottom:12 }}>
                 <span style={{ fontSize:11, fontWeight:700, letterSpacing:'.6px',
@@ -92,13 +86,11 @@ export default function DerslerimPage() {
                 </span>
               </div>
 
-              {/* Ders adı */}
               <h3 style={{ fontSize:15, fontWeight:700, color:'var(--brown)',
                 marginBottom:14, lineHeight:1.4 }}>
                 {n.dersAdi}
               </h3>
 
-              {/* Not grid */}
               <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:8, marginBottom:12 }}>
                 {[
                   { label:'Vize',    value: n.vizeNotu   != null ? n.vizeNotu.toFixed(1)   : '—' },
@@ -116,7 +108,6 @@ export default function DerslerimPage() {
                 ))}
               </div>
 
-              {/* Alt bilgi */}
               <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center',
                 paddingTop:10, borderTop:'1px solid var(--border-light)' }}>
                 <span style={{ fontSize:12, color:'var(--text-muted)' }}>

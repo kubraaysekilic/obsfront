@@ -15,20 +15,13 @@ const Icons = {
   logout:    <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>,
 };
 
-/**
- * Her menü öğesi için hangi rollerin göreceği tanımlı.
- * roles dizisi boşsa herkes görür; doluysa sadece o roller.
- */
 const navItems = [
-  // ── ADMIN + OGRETIM_UYESI ──
   { path: '/dashboard',    icon: Icons.dashboard, label: 'Genel Bakış',       roles: ['ADMIN','OGRETIM_UYESI'] },
   { path: '/ogrenciler',   icon: Icons.students,  label: 'Öğrenciler',        roles: ['ADMIN','OGRETIM_UYESI'] },
   { path: '/dersler',      icon: Icons.courses,   label: 'Dersler',           roles: ['ADMIN','OGRETIM_UYESI'] },
   { path: '/bolumler',     icon: Icons.depts,     label: 'Bölümler',          roles: ['ADMIN','OGRETIM_UYESI'] },
   { path: '/notlar',       icon: Icons.grades,    label: 'Not Yönetimi',      roles: ['ADMIN','OGRETIM_UYESI'] },
-  // ── Sadece ADMIN ──
   { path: '/kullanicilar', icon: Icons.shield,    label: 'Kullanıcı Yönetimi',roles: ['ADMIN'] },
-  // ── Sadece KULLANICI (öğrenci) ──
   { path: '/derslerim',    icon: Icons.courses,   label: 'Derslerim',         roles: ['KULLANICI'] },
   { path: '/notlarim',     icon: Icons.myGrades,  label: 'Notlarım',          roles: ['KULLANICI'] },
 ];
@@ -75,7 +68,6 @@ function Sidebar() {
       </nav>
 
       <div className="sidebar-footer">
-        {/* Öğrenci ise öğrenci no göster */}
         {user?.rol === 'KULLANICI' && user?.ogrenciNo && (
           <div style={{
             margin: '0 12px 8px', padding: '8px 12px',

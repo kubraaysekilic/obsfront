@@ -42,7 +42,6 @@ export default function NotlarimPage() {
     })();
   }, []);
 
-  /* Özet hesapla */
   const tamamlanan = notlar.filter(n => n.ortalama != null);
   const gecilen    = tamamlanan.filter(n => n.gecti).length;
   const gpa = tamamlanan.length > 0
@@ -54,7 +53,6 @@ export default function NotlarimPage() {
   return (
     <div style={{ padding: '28px 32px' }}>
 
-      {/* Başlık */}
       <div style={{ marginBottom: 24 }}>
         <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:4 }}>
           <GradeIcon />
@@ -65,7 +63,6 @@ export default function NotlarimPage() {
         </p>
       </div>
 
-      {/* Hata */}
       {hata && (
         <div style={{ padding:'16px 20px', background:'#F5E8E5', border:'1px solid #E0A098',
           borderRadius:10, color:'#A63825', fontSize:14, marginBottom:24 }}>
@@ -73,7 +70,6 @@ export default function NotlarimPage() {
         </div>
       )}
 
-      {/* Özet kartlar */}
       {!hata && (
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(160px,1fr))',
           gap:14, marginBottom:28 }}>
@@ -97,7 +93,6 @@ export default function NotlarimPage() {
         </div>
       )}
 
-      {/* Not tablosu */}
       {!hata && notlar.length === 0 && (
         <div style={{ padding:'48px 0', textAlign:'center', color:'var(--text-muted)', fontSize:14 }}>
           Henüz not kaydı bulunamadı.

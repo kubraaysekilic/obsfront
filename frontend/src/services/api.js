@@ -8,7 +8,6 @@ const api = axios.create({
   timeout: 10000,
 });
 
-// Request — token ekle
 api.interceptors.request.use(
   config => {
     const token = localStorage.getItem('obs_token');
@@ -18,7 +17,6 @@ api.interceptors.request.use(
   error => Promise.reject(error)
 );
 
-// Response — 401 ise logout
 api.interceptors.response.use(
   response => response.data,
   error => {
@@ -32,14 +30,12 @@ api.interceptors.response.use(
   }
 );
 
-// ===== AUTH =====
 export const authService = {
   login:    (data) => api.post('/auth/login', data),
   register: (data) => api.post('/auth/register', data),
   me:       ()     => api.get('/auth/me'),
 };
 
-// ===== BÖLÜM =====
 export const bolumService = {
   getAll:  ()         => api.get('/bolumler'),
   getById: (id)       => api.get(`/bolumler/${id}`),
@@ -48,7 +44,6 @@ export const bolumService = {
   delete:  (id)       => api.delete(`/bolumler/${id}`),
 };
 
-// ===== ÖĞRENCİ =====
 export const ogrenciService = {
   getAll:        ()         => api.get('/ogrenciler'),
   getById:       (id)       => api.get(`/ogrenciler/${id}`),
@@ -61,7 +56,6 @@ export const ogrenciService = {
   toggleAktif:   (id)       => api.patch(`/ogrenciler/${id}/toggle-aktif`),
 };
 
-// ===== DERS =====
 export const dersService = {
   getAll:     ()         => api.get('/dersler'),
   getById:    (id)       => api.get(`/dersler/${id}`),
@@ -71,7 +65,6 @@ export const dersService = {
   delete:     (id)       => api.delete(`/dersler/${id}`),
 };
 
-// ===== NOT =====
 export const notService = {
   getAll:       ()         => api.get('/notlar'),
   getById:      (id)       => api.get(`/notlar/${id}`),
@@ -84,7 +77,6 @@ export const notService = {
 
 export default api;
 
-// ===== KULLANICI YÖNETİMİ (Admin) =====
 export const kullaniciService = {
   getAll:        ()                  => api.get('/kullanicilar'),
   getById:       (id)                => api.get(`/kullanicilar/${id}`),
@@ -94,7 +86,6 @@ export const kullaniciService = {
   delete:        (id)                => api.delete(`/kullanicilar/${id}`),
 };
 
-// ===== GÜVENLİK LOGLARI (Admin) =====
 export const guvenlikService = {
   getLogs:         () => api.get('/auth/security-logs'),
   getHighRiskLogs: () => api.get('/auth/security-logs/high-risk'),
